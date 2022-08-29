@@ -1,14 +1,22 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const authState = ref<"Login" |"Signup">("Login");
+
+const toggleAuthState = () => {
+ if(authState.value === "Login") authState.value = "Signup";
+  else authState.value = "Login";
+}
+</script>
 
 <template>
   <div>
     <NCard class="card">
-      <h2>Login</h2>
+      <h2>{{authState}}</h2>
       <div class="input-container">
         <input placeholder="Email">
         <input placeholder="Password">
       </div>
-      <NButton>Login </NButton>
+      <NButton>Submit </NButton>
+      <p @click="toggleAuthState">{{authState === "Login" ? "Don't have account? Create one now" : "Already have an accoutn? Please login" }}</p>
     </NCard>
   </div>
 </template>
@@ -32,6 +40,13 @@ text-align: center;}
   margin-bottom: 0.3rem;
   padding: 0.3rem;
   outline: none;
+}
+
+p {
+  color: white;
+  font-size: small;
+  cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 </style>
